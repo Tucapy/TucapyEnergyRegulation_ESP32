@@ -77,7 +77,7 @@ void setup() {
     ModbusHandler::setup();
     FirebaseHandler::setup();
 
-    FirebaseHandler::getConfigData(upper_soc,lower_soc,upper_current,lower_current);
+    FirebaseHandler::getConfigData(upper_soc,lower_soc,upper_current,lower_current,heating);
 
     if(FirebaseHandler::recoverData(idx,power_mode))
     {
@@ -109,7 +109,7 @@ void loop() {
 
     bool modbusOK = ModbusHandler::update();
     
-    if(heat && modbusOK)
+    if(heating && modbusOK)
     {
         static unsigned long lastSwitch = 0;
         
