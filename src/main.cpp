@@ -25,6 +25,7 @@ int upper_soc = 80;
 int lower_soc = 60;
 int upper_current = 2;
 int lower_current = 0;
+bool heating = false;
 
 #define OTA_INTERVAL 60000
 
@@ -104,11 +105,11 @@ void loop() {
         OTA::check();
     }
 
-    FirebaseHandler::getConfigData(upper_soc,lower_soc,upper_current,lower_current);
+    FirebaseHandler::getConfigData(upper_soc,lower_soc,upper_current,lower_current,heating);
 
     bool modbusOK = ModbusHandler::update();
     
-    if(modbusOK)
+    if(heat && modbusOK)
     {
         static unsigned long lastSwitch = 0;
         
