@@ -70,7 +70,8 @@ bool recoverData(int & idx, bool & power_mode)
     return true;
 }
 
-bool getConfigData(int & upper_soc, int & lower_soc, int & upper_current,int & lower_current,bool & heat)
+bool getConfigData(int & upper_soc, int & lower_soc, int & upper_current,
+                    int & lower_current,bool & heat)
 {
     if(!Firebase.RTDB.getJSON(&fbdo,"/config_data"))return false;
     FirebaseJson* json = fbdo.jsonObjectPtr();
@@ -85,7 +86,7 @@ bool getConfigData(int & upper_soc, int & lower_soc, int & upper_current,int & l
     json->get(res,"lower_current");
     lower_current=res.intValue;
     json->get(res,"heat");
-    lower_current=res.intValue;
+    heat=res.intValue;
     
     return true;
 }
