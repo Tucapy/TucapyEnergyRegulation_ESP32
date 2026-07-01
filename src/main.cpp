@@ -110,6 +110,7 @@ void loop() {
     bool modbusOK = ModbusHandler::update();
     webLog("Config data: "+String(upper_soc)+" | "+String(lower_soc)+" | "+
                             String(heating)+" | "+String(power_mode));
+
     if(heating && modbusOK)
     {
         static unsigned long lastSwitch = 0;
@@ -132,6 +133,9 @@ void loop() {
                 lastSwitch = millis();
             }
         }
+    }
+    else if(!heating){
+        shutdown();
     }
 
 // Push to Firebase
