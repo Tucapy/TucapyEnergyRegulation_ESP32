@@ -108,8 +108,6 @@ void loop() {
     FirebaseHandler::getConfigData(upper_soc,lower_soc,upper_current,lower_current,heating);
 
     bool modbusOK = ModbusHandler::update();
-    webLog("Config data: "+String(upper_soc)+" | "+String(lower_soc)+" | "+
-                            String(heating)+" | "+String(power_mode));
 
     if(heating && modbusOK)
     {
